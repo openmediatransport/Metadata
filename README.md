@@ -25,17 +25,18 @@ This is the standard VISCA over IP udp protocol implemented separately to OMT.
 
 ### Sony VISCA (Inband)
 
-This is the standard VISCA protocol encapsulated within OMT metadata.
+This is the standard VISCA over IP protocol encapsulated within OMT metadata.
+Sequence is the same sequence number as used in the original protocol messages.
 
 **Command** 
 
 This is a command sent from controller to camera in hexadecimal format. 
 
-\<OMTPTZ Protocol="VISCA" Command="8101040700FF" />
+\<OMTPTZ Protocol="VISCA" Sequence="22" Command="8101040700FF" />
 
 **Reply**
 
 This is a reply from camera sent back to controller and is in hexadecimal format.
 
-\<OMTPTZ Protocol="VISCA" Reply="0011AABBCC" />
+\<OMTPTZ Protocol="VISCA" Sequence="22" Reply="0011AABBCC" />
 
