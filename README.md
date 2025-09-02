@@ -10,7 +10,9 @@ This defines a web management interface for a sender device.
 
 Receivers should implement a way to browse to this address on request.
 
-\<OMTWeb URL="http://x.x.x.x/" />
+```xml
+<OMTWeb URL="http://x.x.x.x/" />
+```
 
 ## PTZ Control
 
@@ -21,7 +23,9 @@ The following supported protocols are currently defined:
 
 This is the standard VISCA over IP udp protocol implemented separately to OMT.
 
-\<OMTPTZ Protocol="VISCAoverIP" URL="visca://x.x.x.x:port"  />
+```xml
+<OMTPTZ Protocol="VISCAoverIP" URL="visca://x.x.x.x:port"  />
+```
 
 ### Sony VISCA (Inband)
 
@@ -32,11 +36,42 @@ Sequence is the same sequence number as used in the original protocol messages.
 
 This is a command sent from controller to camera in hexadecimal format. 
 
-\<OMTPTZ Protocol="VISCA" Sequence="22" Command="8101040700FF" />
+```xml
+<OMTPTZ Protocol="VISCA" Sequence="22" Command="8101040700FF" />
+```
 
 **Reply**
 
 This is a reply from camera sent back to controller and is in hexadecimal format.
 
-\<OMTPTZ Protocol="VISCA" Sequence="22" Reply="0011AABBCC" />
+```xml
+<OMTPTZ Protocol="VISCA" Sequence="22" Reply="0011AABBCC" />
+```
 
+## Ancillary Data
+
+The following is a proposal for sending and receiving raw SDI ancillary data over OMT.
+This should ideally be sent in per frame metadata with grouping as per **Metadata Grouping** below.
+
+```xml
+<AncillaryData xmns="urn:anc:1.0">
+<Packet did="45" sdid="01" field="1" line="21" horizOffset="0" st2110Channel="0" pts90k="32109876" link="A" stream="VANC">
+<Payload>81 01 0A 01 1E 00 00</Payload>
+</Packet>
+</AncillaryData>
+```
+## Metadata Grouping
+
+To send multiple disparate pieces of metadata within a single frame, use the following grouping syntax.
+
+```xml
+<OMTGroup>
+<OMTPTZ Protocol="VISCA" Sequence="22" Reply="0011AABBCC" />
+<AncillaryData xmns="urn:anc:1.0">
+<Packet did="45" sdid="01" field="1" line="21" horizOffset="0" st2110Channel="0" pts90k="32109876" link="A" stream="VANC">
+<Payload>81 01 0A 01 1E 00 00</Payload>
+</Packet>
+</AncillaryData>
+</OMTGroup>
+```
+Since grouping may not exist when only a single element is sent, it is recommended that any parsing code look for both formats.
