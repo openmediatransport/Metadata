@@ -4,6 +4,13 @@ This document contains recommended metadata specifications for use with Open Med
 
 If you have a specification you would like to see listed here, submit a request under this repositories Issues section.
 
+## Contents
+
+* [Web Management](#web-management)
+* [PTZ Control](#ptz-control)
+* [Ancillary Data](#ancillary-data)
+* [Metadata Grouping](#metadata-grouping)
+
 ## Web Management
 
 This defines a web management interface for a sender device.
