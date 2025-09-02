@@ -53,10 +53,12 @@ This is a reply from camera sent back to controller and is in hexadecimal format
 The following is a proposal for sending and receiving raw SDI ancillary data over OMT.
 This should ideally be sent in per frame metadata with grouping as per **Metadata Grouping** below.
 
+Payload is in hexadecimal format.
+
 ```xml
 <AncillaryData xmns="urn:anc:1.0">
 <Packet did="45" sdid="01" field="1" line="21" horizOffset="0" st2110Channel="0" pts90k="32109876" link="A" stream="VANC">
-<Payload>81 01 0A 01 1E 00 00</Payload>
+<Payload>81010A011E0000</Payload>
 </Packet>
 </AncillaryData>
 ```
@@ -69,7 +71,7 @@ To send multiple disparate pieces of metadata within a single frame, use the fol
 <OMTPTZ Protocol="VISCA" Sequence="22" Reply="0011AABBCC" />
 <AncillaryData xmns="urn:anc:1.0">
 <Packet did="45" sdid="01" field="1" line="21" horizOffset="0" st2110Channel="0" pts90k="32109876" link="A" stream="VANC">
-<Payload>81 01 0A 01 1E 00 00</Payload>
+<Payload>81010A011E0000</Payload>
 </Packet>
 </AncillaryData>
 </OMTGroup>
